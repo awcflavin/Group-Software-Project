@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>Create An Account</title>
+    <title>Login</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -34,7 +34,7 @@ $uname = $_POST['uname'];
 $pword = hash('sha256', $_POST['pword']);
 
 $loginQuery = "SELECT * FROM users WHERE username = ? AND password = ?";
-$stmt = mysqli_prepare($conn, $pwdQuery);
+$stmt = mysqli_prepare($conn, $loginQuery);
 mysqli_stmt_bind_param($stmt, "ss", $uname, $pword);
 $result = mysqli_stmt_execute($stmt);
 
