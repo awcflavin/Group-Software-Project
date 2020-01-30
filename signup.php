@@ -50,6 +50,7 @@ if(strlen($uname)<=16) {
     if($result) {
         $output += "<p>Username already exists</p>";
     }
+}
 
 //Check if the password is valid
 if(!$uppercase || !$lowercase || !$number || strlen($password) < 8 || stlen($pword) > 16) {
@@ -80,11 +81,13 @@ if($uni == "University College Cork") {
 if($output == "") {
     $insertAcc = "INSERT INTO users(username, password, accType, university, email) VALUES (?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $insertAcc);
-    mysqli_stmt_bind_param($stmt, "sssss", $uname, $pword, $accType, $uni, $email);
+    mysqli_stmt_bind_param($stmt, "sssss", $uname, hash('sha256', $pword), $accType, $uni, $email);
     mysqli_stmt_execute($stmt);
     
     $output += "<p>Account creation successful</p>"
 }
+}
 echo $output;
 ?>
 </main>
+</body>
