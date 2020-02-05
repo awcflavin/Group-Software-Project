@@ -5,10 +5,10 @@
 
 function setup_connect ()
 {
-$server = "";
-$database = "";
-$username = "";
-$password = "";
+$server = "cs1.ucc.ie";
+$database = "2021_awf1";
+$username = "awf1";
+$password = "Shochel2";
 $connection = mysqli_connect ($server, $username, $password, $database);
 if ($connection)
  return ($connection);

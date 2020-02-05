@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>Login</title>
+    <title>Create An Account</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -17,13 +17,26 @@
     </ul>
 </header>
 <main>
-        <h1>Log In</h1>
-        <form action="login.php" method="post">
-            <p>Username: </p>
-            <input type="text" name="uname">
-            <p>Password: </p>
-            <input type="password" name="pword">
-            <input type="submit" value="Login">
-        </form>
+    <h1>Create an Account</h1>
+    <form action="signup.php" method="post">
+        <p>Are you a tutor or a student</p>
+        <input type="radio" name="accType" value="tutor"><p>Tutor</p>
+        <input type="radio" name="accType" value="student" checked="checked"><p>Student</p>
+        <p>First Name(0-40): </p>
+        <input type="text" name="fname">
+        <p>Surname(0-40): </p>
+        <input type="text" name="lname">
+        <p>Your University: </p>
+        <select name="uni">
+            <option value="University College Cork">University College Cork</option>
+        </select>
+        <p>Your student E-mail: </p>
+        <input type="text" name="email">
+        <p>Enter a password(8-16): </p>
+        <input type="password" name="pword">
+        <p>Confirm Password: </p>
+        <input type="password" name="pword1">
+        <input type="submit" value="Create Account">
+    </form>
 </main>
 </body>
