@@ -81,7 +81,7 @@ if($uni == "University College Cork") {
 if($output == "") {
     $insertAcc = "INSERT INTO users(username, password, accType, university, email) VALUES (?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $insertAcc);
-    mysqli_stmt_bind_param($stmt, "sssss", $uname, hash('sha256', $pword), $accType, $uni, $email);
+    mysqli_stmt_bind_param($stmt, "sssss", $uname, hash('sha224', $pword), $accType, $uni, $email);
     mysqli_stmt_execute($stmt);
     
     $output += "<p>Account creation successful</p>"
