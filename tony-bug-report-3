@@ -1,0 +1,11 @@
+Bug Name: 
+Error connecting to database
+
+Description:
+When attempting to connect to the database to log in a user, the connection cannot be established.
+
+Steps to reproduce:
+Attempt to log in to a already created account.
+
+Expected Result:
+attempt to login fails
