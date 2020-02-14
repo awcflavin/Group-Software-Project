@@ -1,0 +1,11 @@
+Bug name:
+Student email created in place of tutor.
+
+Description:
+When creating an account, if the tutor option is checked, the account is still created as a student account.
+
+Steps to recreate:
+Create an account and check the tutor box.
+
+Expected result:
+New student account created
