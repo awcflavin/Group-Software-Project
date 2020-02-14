@@ -1,0 +1,11 @@
+Bug Name:
+Incorrect login success
+
+Desctiption:
+When logging into an account, even if incorrect details are supplied, the login pages notifies the user that login has been successfull
+
+Steps to reproduce:
+Attempt to login to an account with incorrect credentials
+
+Expected result:
+Landing screen will show "login successful" even when it hasnt been
