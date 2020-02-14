@@ -1,0 +1,11 @@
+Bug Name: E-mail Validation Error
+
+Description:
+When creating an account, the application accepted emails that appeared as if they were valid ucc emails even
+though they were not.
+
+Steps to reproduce:
+Reproduce by creating attempting to create an account with an invalid student email address.
+
+Expected Result:
+Page informs user of successful account creation.
