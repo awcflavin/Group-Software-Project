@@ -1,0 +1,12 @@
+Bug name:
+Fails to insert new account into database
+
+Description:
+When a new account is created, the account is not entered into the user table in the database correctly.
+
+Steps to reproduce:
+1. Create a new account
+2. Attempt to login to the account with correct credentials.
+
+Expected Result:
+Login is unsuccessful
