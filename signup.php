@@ -17,75 +17,65 @@
     </ul>
 </header>
 <main>
+
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-if (isset($_POST['submit'])) {
+include("setup.php");
+   $conn_id = setup_connect()
+ or die ("cannot connect to server");
 
-$uname = $_POST['uname'];
+//if (isset($_POST['submit'])) {
+
+$fname = $_POST['fname'];
+$lname = $_POST['lname'];
 $pword = $_POST['pword'];
 $pword1 = $_POST['pword1'];
 $uni = $_POST['uni'];
-$accType = $_POST['acctype'];
+$accType = $_POST['accType'];
 $email = $_POST['email'];
 
-$uppercase = preg_match('@[A-Z]@', $password);
-$lowercase = preg_match('@[a-z]@', $password);
-$number    = preg_match('@[0-9]@', $password);
+$uppercase = preg_match('@[A-Z]@', $pword);
+$lowercase = preg_match('@[a-z]@', $pword);
+$number    = preg_match('@[0-9]@', $pword);
 
 $output = "";
 
-define('DB_SERVER', 'localhost:3036');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'rootpassword');
-define('DB_DATABASE', 'database');
-$db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-
-//Check if the username is valid
-if(strlen($uname)<=16) {
-    $pwdQuery = "SELECT * FROM users WHERE username = ?";
-    $stmt = mysqli_prepare($conn, $pwdQuery);
-    mysqli_stmt_bind_param($stmt, "s", $uname);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    if($result) {
-        $output += "<p>Username already exists</p>";
-    }
-}
-
+$pwordlen = strlen($pword);
 //Check if the password is valid
-if(!$uppercase || !$lowercase || !$number || strlen($password) < 8 || stlen($pword) > 16) {
-  $output += "<p>Invalid Password: Passwords must be between 8 and 16 characters long and contain an uppercase letter, lowercase letter, and a digit</p>"
+if(!$uppercase || !$lowercase || !$number || $pwordlen < 8 || $pwordlen > 16) {
+  $output .= "<p>Invalid Password: Passwords must be between 8 and 16 characters long and contain an uppercase letter, lowercase letter, and a digit</p>";
 }
 
 //Check if the passwords match
 if($pword != $pword1) {
-    $output += "<p>Error: Passwords do not match</p>"
+    $output .= "<p>Error: Passwords do not match</p>";
 }
 
 //Check if the email is valid
 if($uni == "University College Cork") {
-    if(accType == "student") {
-        $studentEmailUCC = preg_match('^[0-9]{1,9}@umail.ucc.ie$', email);
+    if($accType == "student") {
+        $studentEmailUCC = preg_match('/^[0-9]{1,9}@umail.ucc.ie$/', $email);
         if(!$studentEmailUCC) {
-            $output += "<p>Invalid student E-mail for University College Cork</p>"
+            $output .= "<p>Invalid student E-mail for University College Cork</p>";
         }
     }
     else {
-        $tutorEmailUCC = preg_match('^[0-9A-Za-z]{1,20}[@](?:[0-9A-Za-z]{1,20}.ucc.ie|ucc.ie)$');
-        if(!tutorEmailUCC) {
-            $output += "<p>Invalid staff E-mail for University College Cork</p>"
+        $tutorEmailUCC = preg_match('/^[0-9A-Za-z]{1,20}[@](?:[0-9A-Za-z]{1,20}.ucc.ie|ucc.ie)$/', $email);
+        if(!$tutorEmailUCC) {
+            $output .= "<p>Invalid staff E-mail for University College Cork</p>";
         }
     }
 }
 
 if($output == "") {
-    $insertAcc = "INSERT INTO users(username, password, accType, university, email) VALUES (?, ?, ?, ?, ?)";
-    $stmt = mysqli_prepare($conn, $insertAcc);
-    mysqli_stmt_bind_param($stmt, "sssss", $uname, hash('sha224', $pword), $accType, $uni, $email);
-    mysqli_stmt_execute($stmt);
-    
-    $output += "<p>Account creation successful</p>"
-}
+    $mysqli_stmt = $conn_id->prepare("INSERT INTO users(fname, lname, pword, accType, uni, email) VALUES (?, ?, ?, ?, ?, ?);");
+    $hashpword = hash('sha224', $pword);
+    $mysqli_stmt->bind_param("ssssss", $fname, $lname, $hashpword, $accType, $uni, $email);
+    mysqli_stmt_execute($mysqli_stmt);  
+    $output .= "<p>Account creation successful</p>";
 }
 echo $output;
 ?>

@@ -18,33 +18,35 @@
 </header>
 <main>
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+include("setup.php");
+   $conn_id = setup_connect()
+ or die ("cannot connect to server");
 
 $output = "";
+$pword = $_POST['pword'];
 
-define('DB_SERVER', 'localhost:3036');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'rootpassword');
-define('DB_DATABASE', 'database');
+$email = $_POST['email'];
+$hashpword = hash('sha224', $pword);
 
-if (isset($_POST['submit'])) {
+$mysqli_stmt = $conn_id->prepare("SELECT email, pword FROM users WHERE email = ? AND pword = ?;");
+$mysqli_stmt->bind_param("ss", $email, $hashpword);
 
-$db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+$mysqli_stmt->execute();
+$result = $mysqli_stmt->get_result();
+$row = $result->fetch_assoc();
 
-$uname = $_POST['uname'];
-$pword = hash('sha256', $_POST['pword']);
-
-$loginQuery = "SELECT * FROM users WHERE username = ? AND password = ?";
-$stmt = mysqli_prepare($conn, $loginQuery);
-mysqli_stmt_bind_param($stmt, "ss", $uname, $pword);
-$result = mysqli_stmt_execute($stmt);
-
-if($result) {
-    $output += "<p>Login Successful</p>"
+if ($hashpword == $row['pword']) {
+    $output .= "<p>Login Successful</p>";
 }
 else {
-    $output ++ "<p>Username or Password Incorrect</p>"
+    $output .= "<p>Login Unsuccessful</p>";
 }
-}
+
+echo $output;
 ?>
 </main>
 </body>
