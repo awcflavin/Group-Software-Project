@@ -1,0 +1,7 @@
+Bug name: Upload authentication.
+
+Description:
+The file uploader does not require authentication from the lecturer. At the moment anyone can upload past exams papers. This must be changed to only allow universities upload papers as they are trust worthy sources.
+
+Fix:
+Restrict anyone form the uploads page that does not have a valid lectuter email.

@@ -1,0 +1,7 @@
+Bug name: Restrict uploads.
+
+Description:
+The form uploader needs to be edited to only allow PDF's. This allows for all files to be an identical type and saves messing around with different formats. File size also needs to be restricted to stop people from clogging up space on the server.
+
+Fix:
+Check the file type and reject anything that is not a pdf. Also check the file size and reject anything that is too big.

@@ -1,0 +1,7 @@
+Bug name: Dynamic college name
+
+Description:
+The college name at the top of the courses.php page needs to be dynamically generated. 
+
+Fix:
+Take the students login information, check their email domain and pull the college name from a database.

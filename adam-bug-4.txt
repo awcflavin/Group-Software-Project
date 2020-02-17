@@ -1,0 +1,7 @@
+Bug name: Sanitise user input
+
+Description:
+Most of the forms that allow user input are severely open to injection attacks. 
+
+Fix:
+All input will have to be escaped and most of database queries changed over to prepared statements.

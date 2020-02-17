@@ -1,0 +1,7 @@
+Bug name: Courses.php links.
+
+Description:
+The links to the courses on each college page are not working. It is just printing them to the screen and do not lead anywhere.
+
+Fix:
+Link the links to download a file and to a discussion page to talk about possible answers.
