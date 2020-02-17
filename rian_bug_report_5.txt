@@ -1,0 +1,17 @@
+-----------------------------------------------------------------------
+Bug Description-
+	No "Verified by Professor" option exists for valid lecturer accounts
+	when reviewing the sample answers page for a question on a paper.
+	This needs to be included to show the validity of an answer produced
+	by a student if deemed correct by a lecturer.
+-----------------------------------------------------------------------	
+Short-hand Bug Name-
+	Professor Verification Bug.
+-----------------------------------------------------------------------	
+Test for Bug-
+	Login with valid lecturer credentials, view an answer for a question
+	on the sample answers page.
+	
+Current Test Result-
+	No verification button presented.
+-----------------------------------------------------------------------	

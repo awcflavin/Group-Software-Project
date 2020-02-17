@@ -1,0 +1,17 @@
+-----------------------------------------------------------------------
+Bug Description-
+	Up-vote and Down-vote buttons display on sample answer pages, 
+	however are not interactive. They do not register a vote and alter
+	the database when clicked as a result.
+-----------------------------------------------------------------------	
+Short-hand Bug Name-
+	Voting Bug
+-----------------------------------------------------------------------	
+Test for Bug-
+	Visit the sample answer webpage for a particular question on a paper
+	and click on the up-vote or down-vote button for an answer. Check if
+	the database entry containing the number of votes has been 
+	incremented.
+Current Test Result-
+	The database entry not incremented.
+-----------------------------------------------------------------------	
