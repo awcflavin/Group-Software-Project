@@ -1,0 +1,16 @@
+-----------------------------------------------------------------------
+Bug Description-
+	Login with an email address of a college that is not UCC still
+	presents the user with the UCC homepage of the site. This needs to 
+	change as the UCC page is not the one most relevant to the user from
+	(e.g) NUIG.
+-----------------------------------------------------------------------	
+Short-hand Bug Name-
+	University Homepage Display Bug.
+-----------------------------------------------------------------------	
+Test for Bug-
+	Login or sign up with a student or lecturer email address from a 
+	registered school other than UCC and inspect the page displayed.
+Current Test Result-
+	UCC homepage is displayed.
+-----------------------------------------------------------------------	

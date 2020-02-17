@@ -1,0 +1,14 @@
+-----------------------------------------------------------------------
+Bug Description-
+	The web pages do not link to the correct CSS stylesheets.
+-----------------------------------------------------------------------	
+Short-hand Bug Name-
+	CSS Reference Bug.
+-----------------------------------------------------------------------	
+Test for Bug-
+	View raw HTML of web pages and check the stylesheet link's href in 
+	the <head> to see if it is the correct file.
+	
+Current Test Result-
+	The stylesheet's href references inncorrect CSS file.
+-----------------------------------------------------------------------	
