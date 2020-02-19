@@ -1,33 +1,15 @@
 <?php
 session_start();
 include "setup.php";
-include "security.php";
+include "tutor-security.php";
 $conn_id = setup_connect()
  or die ("cannot connect to server");
 
-$user=$_SESSION["user"];
-
-$sql1 = "SELECT uni FROM users where email='$user'";
-
-$result_id1 = mysqli_query ($conn_id, $sql1)
-or die ("Cannot execute query");
-
-
-while ($row = mysqli_fetch_assoc ($result_id1)){
-  $college=$row["uni"];
-  $_SESSION["college"]=$college;
-
-    }
+$college=$_SESSION["college"];
 
 
 
-
-
-
-
-
-
-$sql = "SELECT DISTINCT Course,Name FROM Papers where College='$college'";
+$sql = "SELECT DISTINCT Course FROM Papers where College='$college'";
 
 
 
@@ -42,10 +24,11 @@ $coursestr="";
 
 while ($row = mysqli_fetch_assoc ($result_id)){
 	$coursestr.="<div class='col-md-4'>
-						<div class='single-defination'><a href='papers.php?course=".$row['Course']."'><h4 class='mb-20'>";
-     $coursestr.=   $row["Name"];
+						<div class='single-defination'>
+							<h4 class='mb-20'>";
+     $coursestr.=   $row["Course"];
 
-     $coursestr.="</h4></a>
+     $coursestr.="</h4>
 			
 						</div>
 					</div>";
@@ -164,7 +147,6 @@ $conn_id->close();
                     aria-expanded="false"
                     >Blog</a
                   >
-
                   <ul class="dropdown-menu">
                     <li class="nav-item">
                       <a class="nav-link" href="blog.html">Blog</a>
@@ -200,7 +182,7 @@ $conn_id->close();
           <div class="row justify-content-center">
             <div class="col-lg-6">
               <div class="banner_content text-center">
-                <h2><?php printf($college); ?></h2>
+                <h2><?php printf($college); ?> Portal Uploader</h2>
                 <div class="page_link">
                   <a href="index.html">Home</a>
                   <a href="elements.html">Elements</a>
@@ -226,12 +208,76 @@ $conn_id->close();
 		
 			
 			<div class="section-top-border">
-				<h3 class="mb-30 title_color">Courses</h3>
 				<div class="row">
 					<?php
-						printf($coursestr);
+					
 					?>
 					
+          <div class='col-md-4'>
+            <div class='single-defination'>
+              <h4 class='mb-20'></h4>
+      
+
+            <h3>Contribute an exam paper</h3>
+            <h6>Please select a file</h6>
+
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+
+
+<select  name="course" id="course">
+  <option value="Computer Science" selected="Computer Science">Computer Science</option>
+  <option value="Business Information Systems">Business Information Systems</option>
+  <option value="Law">Law</option>
+</select>
+
+<select name="module" id="s">
+  <option value="CS3505" selected="selected">CS3505</option>
+  <option value="CS3518">CS3518</option>
+  <option value="CS2506">CS2506</option>
+</select>
+
+              <select name="year" id="year">
+  <option value="2020" selected="selected">2020</option>
+  <option value="2019">2019</option>
+  <option value="2018">2018</option>
+  <option value="2017">2017</option>
+    <option value="2016">2016</option>
+  <option value="2015">2015</option>
+  <option value="2014">2014</option>
+  <option value="2013">2013</option>
+    <option value="2012">2012</option>
+  <option value="2011">2011</option>
+  <option value="2010">2010</option>
+  <option value="2009">2009</option>
+</select>
+
+<select  name="season" id="season">
+  <option value="Summer" selected="selected">Summer</option>
+  <option value="Winter">Winter</option>
+  <option value="Autumn">Autumn</option>
+</select>
+    <input type="file" class="text-center center-block file-upload" name="fileToUpload" id="fileToUpload">
+<br>
+    <input type="submit" name="submit">
+</div></div><!--/col-3-->
+                    </form>
+
+
+
+
+
+
+
+
+
+
+            </div>
+          </div>
+
+
+
+
+
 				</div>
 			</div>
 			
@@ -243,7 +289,80 @@ $conn_id->close();
 
 	<!--================ Start footer Area  =================-->
     <footer class="footer-area section_gap">
-		</footer>
+			<div class="container">
+			  <div class="row">
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+				  <h4>Top Products</h4>
+				  <ul>
+					<li><a href="#">Managed Website</a></li>
+					<li><a href="#">Manage Reputation</a></li>
+					<li><a href="#">Power Tools</a></li>
+					<li><a href="#">Marketing Service</a></li>
+				  </ul>
+				</div>
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+				  <h4>Quick Links</h4>
+				  <ul>
+					<li><a href="#">Jobs</a></li>
+					<li><a href="#">Brand Assets</a></li>
+					<li><a href="#">Investor Relations</a></li>
+					<li><a href="#">Terms of Service</a></li>
+				  </ul>
+				</div>
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+				  <h4>Features</h4>
+				  <ul>
+					<li><a href="#">Jobs</a></li>
+					<li><a href="#">Brand Assets</a></li>
+					<li><a href="#">Investor Relations</a></li>
+					<li><a href="#">Terms of Service</a></li>
+				  </ul>
+				</div>
+				<div class="col-lg-2 col-md-6 single-footer-widget">
+				  <h4>Resources</h4>
+				  <ul>
+					<li><a href="#">Guides</a></li>
+					<li><a href="#">Research</a></li>
+					<li><a href="#">Experts</a></li>
+					<li><a href="#">Agencies</a></li>
+				  </ul>
+				</div>
+				<div class="col-lg-4 col-md-6 single-footer-widget">
+				  <h4>Newsletter</h4>
+				  <p>You can trust us. we only send promo offers,</p>
+				  <div class="form-wrap" id="mc_embed_signup">
+					<form
+					  target="_blank"
+					  action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+					  method="get"
+					  class="form-inline"
+					>
+					  <input
+						class="form-control"
+						name="EMAIL"
+						placeholder="Your Email Address"
+						onfocus="this.placeholder = ''"
+						onblur="this.placeholder = 'Your Email Address'"
+						required=""
+						type="email"
+					  />
+					  <button class="click-btn btn btn-default">
+						<span>subscribe</span>
+					  </button>
+					  <div style="position: absolute; left: -5000px;">
+						<input
+						  name="b_36c4fd991d266f23781ded980_aefe40901a"
+						  tabindex="-1"
+						  value=""
+						  type="text"
+						/>
+					  </div>
+	  
+					  <div class="info"></div>
+					</form>
+				  </div>
+				</div>
+			  </div>
 			  <div class="row footer-bottom d-flex justify-content-between">
 				<p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
 				  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

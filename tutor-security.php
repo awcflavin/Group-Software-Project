@@ -10,7 +10,7 @@ or die ("cannot connect to server");
 $hashpword = $_SESSION['pword'];
 
 $email = $_SESSION['user'];
-$mysqli_stmt = $conn_id->prepare("SELECT email, pword FROM users WHERE email = ? AND pword = ?;");
+$mysqli_stmt = $conn_id->prepare("SELECT email, pword FROM users WHERE email = ? AND pword = ? AND accType='tutor';");
 $mysqli_stmt->bind_param("ss", $email, $hashpword);
 
 $mysqli_stmt->execute();
