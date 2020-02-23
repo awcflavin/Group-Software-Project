@@ -1,4 +1,13 @@
-Code Review:
+Code Review 1:
+By: Adam O’Brien
+File: security.php
+
+The original security php tested the session credentials against a database and would print to the screen if the session variables failed. 
+
+I realised this is not very user friendly. My updated security.php now tests the session email and their hashed password against the user database, If failed, it just redirects the user to the index.html page. This means no logged out users can access any of the pages where we include security.php
+
+
+Code Review 2:
 By: Adam O’Brien
 File: papers.php
 
@@ -9,3 +18,5 @@ A new bug I uncovered was when being redirected to papers.php from courses.php, 
 I have changed the security credentials of papers.php. It now queries the user database when the page is loaded, checking the session variables of the users email and their hashed password against it.
 
 Commit: 97e6fb1
+
+
