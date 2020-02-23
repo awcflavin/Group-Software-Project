@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "setup.php";
-include "tutor-security.php";
+include "security.php";
 $conn_id = setup_connect()
  or die ("cannot connect to server");
 
