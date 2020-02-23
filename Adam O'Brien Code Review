@@ -1,0 +1,11 @@
+Code Review:
+By: Adam O’Brien
+File: papers.php
+
+The original bugs with papers.php seems to be fixed. The site has now been changed to dynamic as opposed to static. Each university name at the top of the site is now queried from a database by looking at the students login information and extracting the domain name.
+
+A new bug I uncovered was when being redirected to papers.php from courses.php, the file was checking login security from as if the user was a tutor as opposed to a student. This was quite a big bug as it tended to log people out before they even got to view the page.
+
+I have changed the security credentials of papers.php. It now queries the user database when the page is loaded, checking the session variables of the users email and their hashed password against it.
+
+Commit: 97e6fb1
