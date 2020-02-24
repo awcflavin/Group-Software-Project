@@ -1,0 +1,26 @@
+Code Review 1
+Author: Anthony Flavin
+File: courses.php
+Link: https://github.com/awcflavin/Group-Software-Project/blob/master/courses.php
+Commit: bcbac06
+
+Purpose:
+
+This file implements the selection of the college course that the user wishes to retrieve past exam papers of.
+Firstly, the college that the user is attending is found via a database query this is then added to their
+session data. The database is then queried to provide the courses available in that college. Results are
+displayed to the user as links to the papers.php page with the course code as GET form data. papers.php will
+then display the papers available for that specific course.
+
+Review:
+
+Firstly, best practices are not abided by with a lack of comments explaining the functionality of the code,
+particularly the PHP. This needs to be updated in order to improve the readability and maintainability of
+the project. Additionally there appears to be a lot of empty lines that are unnecessary and make the file
+hard to read. Indentation is also inconsistent.
+
+The html portion is exceptionally well laid out and conforms to a high standard of readability.
+
+The code seems to function as intended without any bugs as far as I can find. The setup of the database and
+the security for the login have been implemented in their own files and included here. This reduces the amount
+of redundant code significantly.
