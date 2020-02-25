@@ -1,0 +1,16 @@
+Code Review
+Author: Hoang Anh Mai
+File: signup.php
+Link: https://github.com/awcflavin/Group-Software-Project/blob/master/signup/signup.php
+
+Purpose:
+Make signup page for friendly to user. Initially, after fill in the form server will bring user to a new page with the result of signup.
+This version, if signup fail, user will be directed to signup page with error message at the beginning of the form. Otherwise, redirect user to Pages tabs
+where they can find the exam papers.
+
+Review:
+Much cleaner interface for signup, easier for user to create an account. No bug so far with this version of signup.
+
+HTML file is very well designed, the form is also very easy to use.
+
+Some necessary blank space in the signup.php file but can be easily fixed. Also some comments can be added to increase maintainability.
