@@ -1,0 +1,37 @@
+CS3305 Code Review
+Author: Rían Woods
+----------------------------------------------------------------------------------------
+File: setup.php
+Link: https://github.com/awcflavin/Group-Software-Project/blob/master/setup.php
+
+Code Function:
+	This program is responsible for logging into MySQL and setting up the connection
+	to the database.
+	
+Code Review:
+	The commit contains 34 lines and only 11 of these are lines of code in use. 
+	The rest of the lines are blank space, 3 minimal comment lines and code that was 
+	originally intended for execution but was since deemed to not be used so was just 
+	commented out. All of this clutter reduces the level of readability of the file and 
+	increases file size.
+	The code itself however, performs well. All variables are laid out clearly and it 
+	is functional as intended while remaining concise (Again, the actual code in use).
+
+----------------------------------------------------------------------------------------
+File: signup.php
+Link: https://github.com/awcflavin/Group-Software-Project/blob/master/signup.php
+
+Code Function:
+	Present user with a form to fill in personal details required for an account, then 
+	use these details to create an account for the user and add it to the database. 
+	During this process preforming certain validation checks such as ensuring passwords
+	entered by the user match and checking the validity of the email address against the
+	database.
+	
+Code Review:
+	Readability of code is maintained at a very high level. Code laid out clearly and 
+	well; minimally commented, however efficiently. Clean, well designed user display 
+	via the HTML portion of the file.
+	Code seemingly bug free at this point and runs efficiently and correctly.
+	
+----------------------------------------------------------------------------------------
