@@ -37,8 +37,6 @@ while ($row = mysqli_fetch_assoc ($result_id)){
 $conn_id->close();
 ?>
 
-
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
