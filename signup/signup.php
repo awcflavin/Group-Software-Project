@@ -66,9 +66,9 @@ if ($output == "") {
     $_SESSION["pword"] = $hashpword;
     $_SESSION["accType"] = $accType;
     if ($accType == "tutor") {
-        header("Location: ../tutor-upload.php");
+        header("Location: ../TutorLogin/index.php");
     } else if ($accType == "student") {
-        header("Location: ../courses.php");
+        header("Location: ../StudentLogin/index.php");
     }
 }
 ?>
