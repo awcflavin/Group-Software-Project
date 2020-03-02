@@ -1,33 +1,3 @@
-<?php
-if (session_status() == PHP_SESSION_NONE) {
-	session_start();
-}
-
-include("../setup.php");
-$conn_id = setup_connect()
-	or die("cannot connect to server");
-
-$output = "";
-$pword = $_POST['pword'];
-
-$email = $_POST['email'];
-$hashpword = hash('sha224', $pword);
-
-$mysqli_stmt = $conn_id->prepare("SELECT email, pword FROM users WHERE email = ? AND pword = ?;");
-$mysqli_stmt->bind_param("ss", $email, $hashpword);
-
-$mysqli_stmt->execute();
-$result = $mysqli_stmt->get_result();
-$row = $result->fetch_assoc();
-
-if ($hashpword != $row['pword']) {
-	$output .= "Wrong Password or Email";
-}
-if ($output == "") {
-	header("Location: ../logged.php");
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,16 +48,24 @@ if ($output == "") {
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="images/img-01.png" alt="IMG">
 				</div>
-
+				<?php 
+				if (session_status() == PHP_SESSION_NONE) {
+					session_start();
+				}
+				
+				$signup = $_SESSION["signup"];
+				if ($signup == 1) {
+					echo "<script type='text/javascript'>alert('Account created sucessfully! Press OK to start login.')</script>";
+					$_SESSION["signup"]=0;
+				}
+				?>
 				<form action="signin.php" method="post" class="login100-form validate-form">
 					<span class="login100-form-title">
 						Tutor Login
 					</span>
-					<p style="color:red;font-family: 'Roboto', 'Arial', 'Helvetica Neue', sans-serif;font-size:1.25em;"><?php
-																														echo $output;
-																														?></p>
+
 					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email" required>
+						<input class="input100" type="text" name="email" value="<?php echo $_SESSION["user"] ?>" placeholder="Email" required>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>

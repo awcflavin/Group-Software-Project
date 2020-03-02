@@ -106,7 +106,7 @@ $conn_id->close();
             >
               <ul class="nav navbar-nav menu_nav ml-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="index.html">Home</a>
+                  <a class="nav-link" href="logged.php">Home</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="about-us.html">About</a>
@@ -123,7 +123,10 @@ $conn_id->close();
                   >
                   <ul class="dropdown-menu">
                     <li class="nav-item">
-                      <a class="nav-link" href="courses.html">Courses</a>
+                      <a class="nav-link" href="courses.php">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="tutor-upload.php">Upload</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="course-details.html"

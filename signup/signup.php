@@ -25,12 +25,12 @@ $output = "";
 $pwordlen = strlen($pword);
 //Check if the password is valid
 if (!$uppercase || !$lowercase || !$number || $pwordlen < 8 || $pwordlen > 16) {
-    $output .= "<p>Invalid Password: Passwords must be between 8 and 16 characters long and contain an uppercase letter, lowercase letter, and a digit</p>";
+    $output .= "<li>Invalid Password: Passwords must be between 8 and 16 characters long and contain an uppercase letter, lowercase letter, and a digit</li>";
 }
 
 //Check if the passwords match
 if ($pword != $pword1) {
-    $output .= "<p>Passwords do not match</p>";
+    $output .= "<li>Passwords do not match</li>";
 }
 
 //Check if the email is valid
@@ -38,16 +38,23 @@ if ($uni == "University College Cork") {
     if ($accType == "student") {
         $studentEmailUCC = preg_match('/^[0-9]{1,9}@umail.ucc.ie$/', $email);
         if (!$studentEmailUCC) {
-            $output .= "<p>Invalid student E-mail for University College Cork</p>";
+            $output .= "<li>Invalid student E-mail for University College Cork</li>";
         }
     } else {
         $tutorEmailUCC = preg_match('/^[0-9A-Za-z]{1,20}[@](?:[0-9A-Za-z]{1,20}.ucc.ie|ucc.ie)$/', $email);
         if (!$tutorEmailUCC) {
-            $output .= "<p>Invalid staff E-mail for University College Cork</p>";
+            $output .= "<li>Invalid staff E-mail for University College Cork</li>";
         }
     }
 }
+$mysqli_stmt = $conn_id->prepare("SELECT * FROM users WHERE email = ?;");
+$mysqli_stmt->bind_param("s", $email);
 
+$mysqli_stmt->execute();
+$result = $mysqli_stmt->get_result();
+if (mysqli_num_rows($result) != 0) {
+    $output .= "<li>This email is already used</li>";
+}
 if ($output == "") {
     $mysqli_stmt = $conn_id->prepare("INSERT INTO users(fname, lname, pword, accType, uni, email) VALUES (?, ?, ?, ?, ?, ?);");
     $hashpword = hash('sha224', $pword);
@@ -62,8 +69,6 @@ if ($output == "") {
         header("Location: ../tutor-upload.php");
     } else if ($accType == "student") {
         header("Location: ../courses.php");
-    } else {
-        echo "fail";
     }
 }
 ?>
@@ -101,8 +106,7 @@ if ($output == "") {
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 
     <!-- Vendor CSS-->
     <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
@@ -120,9 +124,11 @@ if ($output == "") {
                     <h2 class="title">Event Registration Form</h2>
                 </div>
                 <div class="card-body">
-                    <?php
-                        echo  $output ;
-                    ?>
+                    <ul style="color:red;font-family: 'Roboto', 'Arial', 'Helvetica Neue', sans-serif;font-size:1.25em;">
+                        <?php
+                        echo   $output;
+                        ?>
+                    </ul>
                     <form action="signup.php" method="POST">
                         <div class="form-row m-b-55">
                             <div class="name">Name</div>
@@ -154,8 +160,7 @@ if ($output == "") {
                                 <div class="input-group">
                                     <div class="rs-select2 js-select-simple select--no-search">
                                         <select name="uni" required>
-                                            <option disabled="disabled" selected="selected">Choose option</option>
-                                            <option>University College Cork</option>
+                                            <option selected="selected">University College Cork</option>
                                             <option>University College Limerick</option>
                                             <option>University College Galway</option>
                                         </select>

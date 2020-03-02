@@ -24,7 +24,7 @@ if ($hashpword != $row['pword']) {
 	$output .= "Wrong Password or Email";
 }
 if ($output == "") {
-	header("Location: ../index.html");
+	header("Location: ../logged.php");
 }
 ?>
 <!DOCTYPE html>
@@ -52,7 +52,9 @@ if ($output == "") {
 
 	<!--===============================================================================================-->
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" href="../signup/css/home_button.css" /> -->
+
 
 	<nav class="navbar navbar-expand-lg navbar-light">
 
@@ -80,9 +82,9 @@ if ($output == "") {
 					<span class="login100-form-title">
 						Student Login
 					</span>
-					<?php
-					echo $output;
-					?>
+					<p style="color:red;font-family: 'Roboto', 'Arial', 'Helvetica Neue', sans-serif;font-size:1.25em;"><?php
+																														echo $output;
+																														?></p>
 					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
 
 
