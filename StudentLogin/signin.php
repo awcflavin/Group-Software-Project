@@ -25,6 +25,7 @@ if ($hashpword != $row['pword']) {
 }
 if ($output == "") {
 	header("Location: ../logged.php");
+	$_SESSION["acc"]=$email;
 }
 ?>
 <!DOCTYPE html>
