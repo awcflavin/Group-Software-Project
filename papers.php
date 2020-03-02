@@ -55,8 +55,6 @@ $conn_id->close();
 
 ?>
 
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
