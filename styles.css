@@ -9,3 +9,14 @@ body {
 #answers {
 	flex:50%;
 }
+
+.submission {
+	border-style: solid;
+	display: inline-grid;
+	width: 100%;
+}
+
+p {
+	display: inline;
+}
+
