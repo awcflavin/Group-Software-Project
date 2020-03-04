@@ -15,11 +15,10 @@ $season=$_GET['season'];
 $path = "papers/$uni/$module/$year/$season/$paperID.pdf";
 
 $answers = "<section id='answers'>
-				<iframe style='display: none;' name='target'></iframe>
-				<form action='view.php?ID=$paperID&uni=$uni&module=$module&year=$year&season=$season' method='post'>
-					<label for='selectQ'>Select a question: </label>
-					<select id='selectQ' name='Question' form='viewQuestionNumber.php'>
-						<option value=1 selected>1</option>";
+				<iframe style='display: none' name='target'></iframe>
+				<label for='selectQ'>Select a question: </label>
+				<select id='selectQ' name='Question'>
+					<option value='1' selected>1</option>";
 
 // Query the papers table to check the number of questions in this paper and populates a drop down list based on this number
 $query = $conn_id->prepare("SELECT questions FROM papers WHERE id = ?;");
@@ -32,14 +31,15 @@ while ($row = mysqli_fetch_assoc($qs)) {
 	$noQ = $row['questions'];
 	for ($i = 2; $i <= $noQ; $i++) {
 		$answers .=
-						"<option value='$i'>$i</option>";
+					"<option value='$i'>$i</option>";
 	}
 }
 
 $answers .=
-					"</select>
-				</form>";
+				"</select>
+				<p><a href='submit.php?paperID=$paperID'>Submit an Answer</a></p>";
 
+// If the link is accessed without question param set it defaults to question 1
 if (isset($_POST['question'])) {
 	$question = $_POST['question'];
 } else {
@@ -47,10 +47,10 @@ if (isset($_POST['question'])) {
 }
 
 // Gets all the answers by each question, allows answer for selected q to be shown and others to be hidden
-for ($i=1; i++; i<=$noQ) {
+for ($x=1; $x<=$noQ; $x++) {
 
 	$query = $conn_id->prepare("SELECT * FROM answers WHERE paperID = ? and question = ?  ORDER BY votes;");
-	$query->bind_param("ss", $paperID, $i);
+	$query->bind_param("ss", $paperID, $x);
 	$query->execute()
 		or die("Cannot execute query");
 	$result = $query->get_result();
@@ -62,6 +62,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 	$timestamp =$row['postTime'];
 	$answer=$row['answer'];
 	
+	// Gets the details of the person who psoted the answer
 	$query1 = "SELECT fname, lname, accType FROM users WHERE ID = $posterID;";
 	$result1 = mysqli_query($conn_id, $query1)
 		or die("Cannot execute query");
@@ -100,16 +101,16 @@ while ($row = mysqli_fetch_assoc($result)) {
 	}
 
 	$answers .=
-		"<div class='submission, question$i>
+		"<div class='submission question$x'>
 			<div class='$details'>
 				<p class='fname'>$fname</p>
 				<p class='lname'>$lname</p>
 				<p class='timestamp'>$timestamp</p>
 			</div>
 			<div class='voting $voted'>
-				<a href='upvote.php/?answerID=$answerID&userID=$userID&voted=$voted' class='upvote' target='target'><img src='/icons/upvote.svg'></a
+				<a href='upvote.php?answerID=$answerID&userID=$userID&voted=$voted' class='upvote' target='target' onclick='vote($votes+1, $answerID)'><img src='/icons/upvote.svg'></a>
 				<p class='votes' id='$answerID'>$votes</p>
-				<a href='downvote.php/?answerID=$answerID&userID=$userID&voted=$voted' class='downvote' target='target'><img src='/icons/downvote.svg'></a>
+				<a href='downvote.php?answerID=$answerID&userID=$userID&voted=$voted' class='downvote' target='target' onclick='vote($votes-1, $answerID)'><img src='/icons/downvote.svg'></a>
 			</div>
 			<div class='answer'>
 				<p>$answer</p>
@@ -118,13 +119,14 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 }
 
-$answers .= "</section>";
+$answers .= "
+	</section>";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Required meta tags -->statecontent
+	<!-- Required meta tags -->
 	<meta charset="utf-8" />
 	<meta
     	name="viewport"
@@ -135,15 +137,20 @@ $answers .= "</section>";
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#selectQ').change(function() {
+    			$('#selectQ').change(function() {
         			$('.submission').hide();
-        			$('.' + $(this).val()).show();    
+        			$('.question' + $(this).val()).show();    
     			});
 		});
+
+		function vote(newValue, id) {
+			document.getElementById(id).innerHTML = newValue;
+		};
 	</script>
 	<title>Exam Paper View</title>
 </head>
 <body>
 	<iframe id='paper' src="<?php echo $path; ?>" width=900 height=900></iframe>
 	<?php echo $answers; ?>
+
 </body>
