@@ -62,7 +62,7 @@ $paperID = $_GET['paperID'];
                             <div class="name">Answer</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" name="answer">
+                                    <textarea class="" rows="25" cols="68" name="answer"></textarea>
                                 </div>
                             </div>
                         </div>
