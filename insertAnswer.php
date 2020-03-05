@@ -1,12 +1,11 @@
 <?php
 include "setup.php";
-//include "security.php";
+include "security.php";
 
 $conn_id = setup_connect()
 	or die ("cannot connect to server");
 
-$userID =1;
-//$userID = $_SESSION['id']
+$userID = $_SESSION['id']
 $paperID = $_POST['paperID'];
 $question = $_POST['question'];
 $answer = $_POST['answer'];

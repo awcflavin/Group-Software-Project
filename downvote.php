@@ -1,6 +1,6 @@
 <?php
 include "setup.php";
-//include "security.php";
+include "security.php";
 
 $conn_id = setup_connect()
 	or die ("cannot connect to server");
